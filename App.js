@@ -1,33 +1,25 @@
-import { StatusBar } from "expo-status-bar";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen';
+import CoursesScreen from './src/screens/CoursesScreen';
+import CoursesInformationScreen from './src/screens/CoursesInformationScreen';
+import CounterScreen from './src/screens/CounterScreen';
 
+
+const Stack = createNativeStackNavigator();
 export default function App() {
-  const courses = [
-    { name: "Angular", id: 1 },
-    { name: "React Js", id: 2 },
-    { name: "C#", id: 3 },
-    { name: "C Programlama", id: 4 },
-    { name: "Bootstrap", id: 5 },
-  ];
   return (
-    <FlatList
-      // horizontal={true}
-      // showsHorizontalScrollIndicator={false}
-      data={courses}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => {
-        return <Text style={styles.content}>{item.name}</Text>;
-      }}
-    />
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Anasayfa" component={HomeScreen} />
+        <Stack.Screen name="Kurslarım" component={CoursesScreen} />
+        <Stack.Screen name="KursBilgilerim" component={CoursesInformationScreen} />
+        <Stack.Screen name="Sayac" component={CounterScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  content: {
-    fontSize: 20,
-    backgroundColor: 'yellow',
-    marginVertical: 10,
-    padding: 20,
-  },
-});
-
+const styles = StyleSheet.create({});
